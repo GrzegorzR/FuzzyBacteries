@@ -1,0 +1,5 @@
+
+
+
+class FuzzyRule:
+    aa = None
