@@ -2,7 +2,10 @@ from __future__ import division
 
 
 class MembershipFunction:
-    a, b, c, d = None
+    a = None
+    b = None
+    c = None
+    d = None
 
     def __init__(self, a, b, c, d):
         self.a = a
