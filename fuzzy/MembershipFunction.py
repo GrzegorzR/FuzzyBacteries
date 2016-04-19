@@ -35,6 +35,9 @@ class MembershipFunction:
             self.c = uniform(max(self.c - mutation_range, self.range_min), min(self.c + mutation_range, self.range_max))
             self.d = uniform(max(self.d - mutation_range, self.range_min), min(self.d + mutation_range, self.range_max))
 
+    def get_parameters(self):
+        return self.a, self.b, self.c, self.d
+
     def print_details(self):
         print("\t\tlower bound:", self.range_min, "upper bound:", self.range_max, "a =", self.a, "b =", self.b, "c =",
               self.c, "d =", self.d)

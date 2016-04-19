@@ -1,3 +1,4 @@
+from __future__ import print_function
 from fuzzy.FuzzyRule import FuzzyRule
 from fuzzy.FuzzyRuleBase import FuzzyRuleBase
 
@@ -25,8 +26,12 @@ def main():
     print("\n\nMutated fuzzy rule base")
     test_fuzzy_rule_base.print_details()
 
-    print("Get truncated importance of first rule in 1")
+    print("\n\nGet truncated importance of first rule in 1")
     print(test_fuzzy_rule_base.fuzzy_rules[0].get_importance(1))
+
+    input_vector = [2, -1, -1.5]
+    print("\n\nEvaluate model for input vector :", input_vector)
+    print(test_fuzzy_rule_base.evaluate(input_vector))
 
 if __name__ == "__main__":
     main()
