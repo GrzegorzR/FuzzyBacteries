@@ -25,6 +25,7 @@ class MembershipFunction:
             return 1
         if self.d <= x <= self.d:
             return (self.d - x) / (self.d - self.c)
+        return 0
 
     def mutate(self, mutation_degree, distribution_type):
         mutation_range = mutation_degree * self.range
