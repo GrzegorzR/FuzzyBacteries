@@ -3,18 +3,16 @@ from MembershipFunction import MembershipFunction
 
 
 class FuzzyRule:
-    def __init__(self, inputs_order, antecedents, consequence):
+    def __init__(self, antecedents, consequence, inputs_order = None):
         self.inputs_order = inputs_order
         self.antecedents = antecedents
         self.consequence = consequence
         self.number_of_inputs = len(inputs_order)
 
     def get_importance(self, x):
-        #TODO to jest zle bo przyjmuje tylko jedna wartosc, a ma byc wektor
-        #klase wyzej tez jest zle
         ante_importances = []
         for ante_id in xrange(self.number_of_inputs):
-            ante_importances.append(self.antecedents[ante_id].get_importance(x))
+            ante_importances.append(self.antecedents[ante_id].get_importance(x[ante_id]))
         return min(ante_importances)
 
     def degranulate_nominator(self, x):

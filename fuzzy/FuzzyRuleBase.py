@@ -1,5 +1,5 @@
 from __future__ import print_function, division
-from random import shuffle
+
 
 
 class FuzzyRuleBase:
@@ -10,12 +10,7 @@ class FuzzyRuleBase:
     def push_fuzzy_rule(self, fuzzy_rule):
         self.fuzzy_rules.append(fuzzy_rule)
 
-    def shuffle_rules(self):
-        shuffle(self.fuzzy_rules)
 
-    def mutate_rules(self, first_rule_indicator, number_of_rules, mutation_degree, distribution_type="uniform"):
-        for rule_id in range(first_rule_indicator, first_rule_indicator + number_of_rules):
-            self.fuzzy_rules[rule_id].mutate(mutation_degree, distribution_type)
 
     def print_details(self):
         print("Number of rules:", len(self.fuzzy_rules))
@@ -33,3 +28,12 @@ class FuzzyRuleBase:
         if denominator != 0:
             return nominator/(3*denominator)
         return float('inf')
+
+
+    def calculate_error(self, inputs, results):
+        computated = []
+        #TODO na numpy byloby latwiej hcyba
+        for input in inputs:
+            computated.append(self.evaluate(input))
+        #podobno mean square error, ale chuj wie
+        return((results - computated) ** 2).mean(axis = None)

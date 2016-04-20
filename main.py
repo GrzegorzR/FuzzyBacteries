@@ -4,6 +4,7 @@ from fuzzy.FuzzyRuleBase import FuzzyRuleBase
 
 
 def main():
+    """
     input_ranges = [[0, 5], [-2, 6], [-5.4, -1.2]]
     in_len = len(input_ranges)
     output_range = [-3.3, 3.3]
@@ -32,6 +33,11 @@ def main():
     input_vector = [2, -1, -1.5]
     print("\n\nEvaluate model for input vector :", input_vector)
     print(test_fuzzy_rule_base.evaluate(input_vector))
-
+    """
+    a = 1
+    b = a
+    b= 2
+    print (a)
+    print (b)
 if __name__ == "__main__":
     main()
