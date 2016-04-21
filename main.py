@@ -1,6 +1,7 @@
 from __future__ import print_function
 from fuzzy.FuzzyRule import FuzzyRule
 from fuzzy.FuzzyRuleBase import FuzzyRuleBase
+from data.function6d import get_6dsample
 
 
 def main():
@@ -34,10 +35,8 @@ def main():
     print("\n\nEvaluate model for input vector :", input_vector)
     print(test_fuzzy_rule_base.evaluate(input_vector))
     """
-    a = 1
-    b = a
-    b= 2
-    print (a)
-    print (b)
+    print(get_6dsample(10000), get_6dsample(10000))
+
+
 if __name__ == "__main__":
     main()
