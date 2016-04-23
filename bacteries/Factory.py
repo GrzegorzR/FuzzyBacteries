@@ -25,3 +25,15 @@ def get_random_bacteria(chromosomes_number, antecedents_ranges, consequence_rang
     for i in range(0, chromosomes_number):
         result.push_fuzzy_rule(get_random_chromosome(antecedents_ranges, consequence_range))
     return result
+
+
+def get_random_population(chromosomes_number, antecedents_ranges, consequence_range, population_size, inputs, output):
+    current_size = 0
+    population = []
+    while current_size < population_size:
+        bacteria = get_random_bacteria(chromosomes_number, antecedents_ranges, consequence_range)
+        if bacteria.calculate_error(inputs, output) != float('inf'):
+            population.append(bacteria)
+            current_size += 1
+            print("sukces")
+    return population
