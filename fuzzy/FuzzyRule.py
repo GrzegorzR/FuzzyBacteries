@@ -1,5 +1,5 @@
 from __future__ import print_function, division
-from MembershipFunction import MembershipFunction
+# from MembershipFunction import MembershipFunction
 
 
 class FuzzyRule:
@@ -7,7 +7,7 @@ class FuzzyRule:
         self.inputs_order = inputs_order
         self.antecedents = antecedents
         self.consequence = consequence
-        self.number_of_inputs = len(inputs_order)
+        self.number_of_inputs = len(antecedents)
 
     def get_importance(self, x):
         ante_importances = []

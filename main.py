@@ -1,8 +1,9 @@
 from __future__ import print_function
-from fuzzy.FuzzyRule import FuzzyRule
-from fuzzy.FuzzyRuleBase import FuzzyRuleBase
+# from fuzzy.FuzzyRule import FuzzyRule
+# from fuzzy.FuzzyRuleBase import FuzzyRuleBase
 from data.function6d import get_6dsample
-
+from bacteries.Factory import get_random_bacteria
+# from random import randint
 
 def main():
     """
@@ -35,8 +36,21 @@ def main():
     print("\n\nEvaluate model for input vector :", input_vector)
     print(test_fuzzy_rule_base.evaluate(input_vector))
     """
-    print(get_6dsample(10000), get_6dsample(10000))
-
-
+    _6_d_sample = get_6dsample(100)
+    print(len(_6_d_sample.inputs[0]))
+    print(len(_6_d_sample.outputs))
+    print(_6_d_sample.inputs_ranges)
+    print(_6_d_sample.output_range)
+    bacteria = get_random_bacteria(6, _6_d_sample.inputs_ranges, _6_d_sample.output_range)
+    best_mse = bacteria.calculate_error(_6_d_sample.inputs, _6_d_sample.outputs)
+    print(best_mse)
+    # udalo mi sie dostac blad inny niz inf po ilus tam mutacjach
+    for i in xrange(10000):
+        # indicator = randint(0, 5)
+        bacteria.mutate_rules(0, 6, mutation_degree=1)
+        cur_mse = bacteria.calculate_error(_6_d_sample.inputs, _6_d_sample.outputs)
+        if cur_mse < best_mse:
+            best_mse = cur_mse
+        print(best_mse)
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 from __future__ import print_function, division
-
-
+import numpy as np
+# from math import sqrt
 
 class FuzzyRuleBase:
 
@@ -9,8 +9,6 @@ class FuzzyRuleBase:
 
     def push_fuzzy_rule(self, fuzzy_rule):
         self.fuzzy_rules.append(fuzzy_rule)
-
-
 
     def print_details(self):
         print("Number of rules:", len(self.fuzzy_rules))
@@ -23,17 +21,29 @@ class FuzzyRuleBase:
         nominator = 0
         denominator = 0
         for rule_id in xrange(len(self.fuzzy_rules)):
-            nominator += self.fuzzy_rules[rule_id].degranulate_nominator(input_vector[rule_id])
-            denominator += self.fuzzy_rules[rule_id].degranulate_denominator(input_vector[rule_id])
+            nominator += self.fuzzy_rules[rule_id].degranulate_nominator(input_vector)
+            denominator += self.fuzzy_rules[rule_id].degranulate_denominator(input_vector)
         if denominator != 0:
             return nominator/(3*denominator)
         return float('inf')
 
-
     def calculate_error(self, inputs, results):
-        computated = []
-        #TODO na numpy byloby latwiej hcyba
-        for input in inputs:
-            computated.append(self.evaluate(input))
-        #podobno mean square error, ale chuj wie
-        return((results - computated) ** 2).mean(axis = None)
+        predictions = []
+        # numpy nie ma MSE. Ale w scikit-learnie jest
+        # Toolkit do machine learningu postawiony na numpy scipy i matplocie
+        # http://scikit-learn.org/stable/index.html
+        # "pip install -U scikit-learn"
+        # Tak czy inaczej dupa bo nie radzi sobie z inf
+        # To jest zdaje mi sie szybkie rozwiazanie
+        for input_val in inputs:
+            predictions.append(self.evaluate(input_val))
+        error = np.array(predictions) - np.array(results)
+        rss = (error * error).sum() # residual sum of squares
+        mse = rss/len(predictions) # Mean squared error
+        # mysle ze w obliczeniach nie ma roznicy, czy bedziemy uzywac rmse czy mse. MSE bedzie sie troche szybcziej
+        # liczyc wiec zostal bym przy tym. RMSE moze byc "lepsze" przy wyswietlaniu bledu bo pokazuje o ile srednio
+        # w tej samej jednostce odbiegaja przewidywania od wartosci rzeczywistych. Jak by co:
+        #
+        # rmse = sqrt(mse) # root mean squared error
+        #
+        return mse
