@@ -12,7 +12,8 @@ class FuzzyRule:
     def get_importance(self, x):
         ante_importances = []
         for ante_id in xrange(self.number_of_inputs):
-            ante_importances.append(self.antecedents[ante_id].get_importance(x[ante_id]))
+            dupa = self.antecedents[ante_id]
+            ante_importances.append(dupa.get_importance(x[ante_id]))
         return min(ante_importances)
 
     def degranulate_nominator(self, x):

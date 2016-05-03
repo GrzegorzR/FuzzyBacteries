@@ -1,15 +1,21 @@
+from __future__ import division
 from bacteries.Gene import Gene
 from bacteries.Chromosome import Chromosome
 from bacteries.Bacteria import Bacteria
-from random import uniform
+from random import uniform, gauss
 
 
 def get_random_gene(range_min, range_max):
-    a = uniform(range_min, range_max)
-    b = uniform(a, range_max)
-    c = uniform(b, range_max)
-    d = uniform(c, range_max)
-    return Gene(a, b, c, d, range_min, range_max)
+    a = 1
+    d = 0
+    while(d <a):
+         a = gauss(range_min, (range_max-range_min)/3)
+         d = gauss(range_max, (range_max-range_min)/3)
+
+    b = uniform(a, d)
+    c = uniform(b, d)
+
+    return Gene(a, b, c, d, range_max, range_min)
 
 
 def get_random_chromosome(antecedents_ranges, consequence_range):
