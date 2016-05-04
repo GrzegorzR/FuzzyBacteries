@@ -31,7 +31,7 @@ def fun2(x, y):
 def plotResult(bacteria):
     fig = plt.figure()
     ax = fig.add_subplot(1, 2, 1, projection='3d')
-    x = y = np.arange(0, 6.0, 0.05)
+    x = y = np.arange(.5, 5., 0.05)
     X, Y = np.meshgrid(x, y)
     zs = np.array([fun(x, y, bacteria) for x, y in zip(np.ravel(X), np.ravel(Y))])
     Z = zs.reshape(X.shape)
@@ -48,18 +48,17 @@ def plotResult(bacteria):
 def main():
     population_mutator = PopulationMutator()
     iterations = 100
-    sample = get_2d_sample(10)
+    sample = get_2d_sample(100)
     population_size = 10
-    population = get_random_population(10, sample.inputs_ranges, sample.output_range, population_size,
+    population = get_random_population(100, sample.inputs_ranges, sample.output_range, population_size,
                                        sample.inputs, sample.outputs)
     for i in xrange(0, iterations):
         print("iteracja: " + str(i))
         for j in xrange(0, population_size):
-            population[j].improving_mutation(5, sample)
+            population[j].improving_mutation(10, sample)
             print(population[j].calculate_error(sample.inputs, sample.outputs))
 
-        # ten population mutator nie dziala, nie wiem czemu 
-        population_mutator.mutate(population, 10, sample)
+        population = population_mutator.mutate(population, 50, sample)
         print ("po transferze genow")
         for j in xrange(0, population_size):
             print(population[j].calculate_error(sample.inputs, sample.outputs))

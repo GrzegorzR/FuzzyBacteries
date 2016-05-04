@@ -1,4 +1,4 @@
-
+from copy import deepcopy
 from random import randint
 
 
@@ -8,7 +8,7 @@ class PopulationMutator:
         superior, inferior = self.divide_population(population, sample)
         for i in xrange(0, iterations):
                 self.tansfer_superior_genes(superior, inferior, sample)
-
+        return superior + inferior
 
 
 
@@ -19,5 +19,6 @@ class PopulationMutator:
     def tansfer_superior_genes(self, superior, inferior, sample):
         sup_num = randint(0, len(superior) -1)
         inf_num = randint(0, len(inferior) -1)
-        good_gene = superior[sup_num].get_best_weighted_rule(sample)
-        inferior[inf_num].change_least_weighted_rule(sample,good_gene)
+        inferior[inf_num] = deepcopy(superior[sup_num])
+        #good_gene = superior[sup_num].get_best_weighted_rule(sample)
+        #inferior[inf_num].change_least_weighted_rule(sample,good_gene)
