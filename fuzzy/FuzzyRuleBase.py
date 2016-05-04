@@ -1,4 +1,7 @@
 from __future__ import print_function, division
+
+from copy import deepcopy
+
 import numpy as np
 # from math import sqrt
 
@@ -47,3 +50,11 @@ class FuzzyRuleBase:
         # rmse = sqrt(mse) # root mean squared error
         #
         return mse
+
+    def change_least_weighted_rule(self, sample, new_rule):
+        sorted_rules = sorted(self.fuzzy_rules, key=lambda x: x.mean_weight(sample.inputs))
+        #nie wiem kurwa jak dzialaja te referencje w pythonie do konca, takze moze to tutaj nie dzialac
+        sorted_rules[0] = deepcopy(new_rule)
+
+    def get_best_weighted_rule(self, sample):
+        return sorted(self.fuzzy_rules, key=lambda x: x.mean_weight(sample.inputs), reverse=True)

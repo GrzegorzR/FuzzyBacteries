@@ -12,12 +12,6 @@ class Bacteria(FuzzyRuleBase):
     def calculate_iter_num(self):
         return int(ceil(len(self.fuzzy_rules) / 10.))
 
-    """
-    def mutate_rules(self, first_rule_indicator, number_of_rules, mutation_degree, distribution_type="uniform"):
-        ids = xrange(first_rule_indicator, first_rule_indicator + number_of_rules)
-        mutate_rules(ids,mutation_degree= 0.7)
-    """
-
     def mutate_rules(self, rules_ids, mutation_degree, distribution_type="uniform"):
         for rule_id in rules_ids:
             self.fuzzy_rules[rule_id].mutate(mutation_degree, distribution_type)
@@ -47,7 +41,8 @@ class Bacteria(FuzzyRuleBase):
                 end_of_range = number_of_inputs
             else:
                 end_of_range = i + mut_per_iter_num
-            self.fuzzy_rules = self.improve_chromosomes(range(i, end_of_range), number_of_clones, input_sample).fuzzy_rules
+            self.fuzzy_rules = self.improve_chromosomes(range(i, end_of_range), number_of_clones,
+                                                        input_sample).fuzzy_rules
 
     def improve_chromosomes(self, chromosomes_to_improve, num_of_clones, input_sample):
         best_mse = self.calculate_error(input_sample.inputs, input_sample.outputs)
@@ -61,3 +56,7 @@ class Bacteria(FuzzyRuleBase):
                 best_clone_id = clone_id
                 best_mse = cur_mse
         return clones[best_clone_id]
+
+
+
+

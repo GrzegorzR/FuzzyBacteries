@@ -1,9 +1,12 @@
 from __future__ import print_function, division
+
+
 # from MembershipFunction import MembershipFunction
+from copy import deepcopy
 
 
 class FuzzyRule:
-    def __init__(self, antecedents, consequence, inputs_order = None):
+    def __init__(self, antecedents, consequence, inputs_order=None):
         self.inputs_order = inputs_order
         self.antecedents = antecedents
         self.consequence = consequence
@@ -37,3 +40,11 @@ class FuzzyRule:
             self.antecedents[i].print_details()
         print("\nconsequence:")
         self.consequence.print_details()
+
+    def mean_weight(self, inputs):
+        sum = 0
+        for x in inputs:
+            sum = sum + self.get_importance(x)
+        return sum/len(inputs)
+
+

@@ -5,6 +5,8 @@ from data.function6d import get_6dsample
 from data.function2d import get_2d_sample
 from bacteries.Factory import get_random_population
 from bacteries.Bacteria import Bacteria
+from bacteries.PopulationMutator import PopulationMutator
+
 from copy import deepcopy
 from scipy.optimize import root
 from numpy import arange
@@ -44,15 +46,22 @@ def plotResult(bacteria):
 
 
 def main():
+    population_mutator = PopulationMutator()
     iterations = 100
-    sample = get_2d_sample(100)
-    population_size = 2
-    population = get_random_population(500, sample.inputs_ranges, sample.output_range, population_size,
+    sample = get_2d_sample(10)
+    population_size = 10
+    population = get_random_population(10, sample.inputs_ranges, sample.output_range, population_size,
                                        sample.inputs, sample.outputs)
     for i in xrange(0, iterations):
         print("iteracja: " + str(i))
         for j in xrange(0, population_size):
             population[j].improving_mutation(5, sample)
+            print(population[j].calculate_error(sample.inputs, sample.outputs))
+
+        # ten population mutator nie dziala, nie wiem czemu 
+        population_mutator.mutate(population, 10, sample)
+        print ("po transferze genow")
+        for j in xrange(0, population_size):
             print(population[j].calculate_error(sample.inputs, sample.outputs))
 
     best = None
