@@ -34,7 +34,7 @@ class Bacteria(FuzzyRuleBase):
 
     def improving_mutation(self, number_of_clones, input_sample):
         self.shuffle_rules()
-        number_of_inputs = len(input_sample.inputs)
+        number_of_inputs = len(self.fuzzy_rules)
         mut_per_iter_num = self.calculate_iter_num()
         for i in xrange(0, number_of_inputs, mut_per_iter_num):
             if i + mut_per_iter_num > number_of_inputs:

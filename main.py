@@ -25,7 +25,7 @@ def fun(x, y, bacteria):
 
 
 def fun2(x, y):
-    return sin(x) + cos(y)
+    return sin(x) + sin(y)
 
 
 def plotResult(bacteria):
@@ -47,10 +47,10 @@ def plotResult(bacteria):
 
 def main():
     population_mutator = PopulationMutator()
-    iterations = 100
+    iterations = 10
     sample = get_2d_sample(100)
     population_size = 10
-    population = get_random_population(100, sample.inputs_ranges, sample.output_range, population_size,
+    population = get_random_population(25, sample.inputs_ranges, sample.output_range, population_size,
                                        sample.inputs, sample.outputs)
     for i in xrange(0, iterations):
         print("iteracja: " + str(i))
@@ -58,7 +58,7 @@ def main():
             population[j].improving_mutation(10, sample)
             print(population[j].calculate_error(sample.inputs, sample.outputs))
 
-        population = population_mutator.mutate(population, 50, sample)
+        population = population_mutator.mutate(population, 100, sample)
         print ("po transferze genow")
         for j in xrange(0, population_size):
             print(population[j].calculate_error(sample.inputs, sample.outputs))

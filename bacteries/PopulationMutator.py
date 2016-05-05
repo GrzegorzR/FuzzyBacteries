@@ -19,6 +19,7 @@ class PopulationMutator:
     def tansfer_superior_genes(self, superior, inferior, sample):
         sup_num = randint(0, len(superior) -1)
         inf_num = randint(0, len(inferior) -1)
-        inferior[inf_num] = deepcopy(superior[sup_num])
-        #good_gene = superior[sup_num].get_best_weighted_rule(sample)
-        #inferior[inf_num].change_least_weighted_rule(sample,good_gene)
+        #inferior[inf_num] = deepcopy(superior[sup_num])
+        good_gene = superior[sup_num].get_best_weighted_rule(sample)
+        inferior[inf_num].change_least_weighted_rule(sample,good_gene)
+

@@ -4,7 +4,7 @@ from data.Data import DataSample
 
 
 def function2d(x1, x2):
-    return sin(x1) + cos(x2)
+    return sin(x1) + sin(x2)
 
 
 def get_2d_sample(number):
