@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from data.function6d import get_6dsample
 from data.function2d import get_2d_sample
+from data.btc_data import get_btc_train_data, get_btc_test_data
 from bacteries.Factory import get_random_population
 from bacteries.Bacteria import Bacteria
 from bacteries.PopulationMutator import PopulationMutator
@@ -48,9 +49,10 @@ def plotResult(bacteria):
 def main():
     population_mutator = PopulationMutator()
     iterations = 10
-    sample = get_2d_sample(100)
-    population_size = 10
-    population = get_random_population(25, sample.inputs_ranges, sample.output_range, population_size,
+    #sample = get_2d_sample(100)
+    sample = get_btc_train_data()
+    population_size = 2
+    population = get_random_population(1000, sample.inputs_ranges, sample.output_range, population_size,
                                        sample.inputs, sample.outputs)
     for i in xrange(0, iterations):
         print("iteracja: " + str(i))
@@ -64,7 +66,7 @@ def main():
             print(population[j].calculate_error(sample.inputs, sample.outputs))
 
     best = None
-    best_val = 1000
+    best_val = float('inf')
     for bacteria in population:
         if bacteria.calculate_error(sample.inputs, sample.outputs) < best_val:
             best = bacteria
