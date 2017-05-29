@@ -54,7 +54,6 @@ class FuzzyRuleBase:
     def change_least_weighted_rule(self, sample, new_rule):
 
         sorted_rules = sorted(self.fuzzy_rules, key=lambda x: x.mean_weight(sample.inputs))
-        #nie wiem kurwa jak dzialaja te referencje w pythonie do konca, takze moze to tutaj nie dzialac
         sorted_rules[0] = deepcopy(new_rule)
         self.fuzzy_rules = sorted_rules
 
